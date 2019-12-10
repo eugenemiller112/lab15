@@ -1,0 +1,15 @@
+---
+title: "lab15"
+author: "allstars"
+date: "12/10/2019"
+output: html_document
+---
+```{r}
+library(tidyverse)
+temp <- tempfile()
+questions <- read_csv("noc_regions.csv")
+data1 <- unzip("athlete_events.csv.zip")
+answers <- read_csv("./athlete_events.csv")
+```
+
+## Overall Question: What attributes make the best athelete? 
