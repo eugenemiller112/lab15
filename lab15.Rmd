@@ -13,3 +13,5 @@ answers <- read_csv("./athlete_events.csv")
 ```
 
 ## Overall Question: What attributes make the best athelete? 
+
+## Team's Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
