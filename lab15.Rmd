@@ -15,3 +15,43 @@ olympic_data <- read_csv("./athlete_events.csv")
 ## Overall Question: What attributes make the best athelete? 
 
 ## Team's Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
+
+## Individual Sections:
+
+# Emily Archambault
+# Sub-Question: How does the number of summer Olympic medals received by the United States compare to the other most populous countries in the world?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(purrr)
+olympics <- read_csv("./athlete_events.csv")
+as_tibble(olympics)
+
+olympics <- olympics %>%
+  arrange(Year)
+
+top5 <- olympics %>%
+  filter(Team == "United States" | Team == "China" | Team == "India" | Team == "Indonesia" | Team == "Brazil") %>%
+  filter(Season == "Summer") %>%
+  filter(Year >= 1920) %>%
+  group_by(Team, Year) %>%
+  summarise(medals = sum(!is.na(Medal)))
+
+top5 %>%
+  split(.$Team) %>%
+  map(~ lm(medals ~ Year, data = .))
+
+ggplot(data = top5) + geom_point(mapping=aes(x= Year, y = medals, color = Team)) +
+  geom_abline(intercept = -1196.0272, slope =  0.6168, color = "#F8766D") +
+  geom_abline(intercept = -3120.649, slope =  1.607, color = "#7CAE00") +
+  geom_abline(intercept = 244.4371, slope =  -0.1199, color = "#00BFC4") +
+  geom_abline(intercept = -127.92308, slope =  0.06533, color = "#619CFF") +
+  geom_abline(intercept = -2998.47, slope =  1.62, color = "#C77CFF") +
+  labs(y = "Medal Count", title = "Summer Olympic Medals Won in the Past Century")
+```
+
+This question is interesting because you might think that those countries with the most people in them, and therefore the most potential athletic talent, would be scoring high numbers of medals. However, through my analysis, it turns out this isn't the case, so population count alone isn't a factor that contributes highly to overall medal count. The United States was the top scorer by far, while some countries were at practically zero (Indonesia) or had a downward trend (India). This relates to the overall question of what makes the best athlete by indicating that the size of the country they come from isn't an important thing to know- it likely has to do with something else, like the wealth of the country. The new tools I used were lm to match the data, and map to fit linear models to each country in the column. The ethical implications of these findings are that there is likely a vast amount of unrecognized athletic potential, given that some of the most populated areas aren't getting many Olympic medals, so perhaps the Olympics aren't a true measure of the "best in the world".
+
+Reflection:
+I don't think my goals have changed drastically, but this course has made me more interested in statistics and statistical analysis (and I'm taking a stats/programming class next semester now). I was very new to coding when I started this course, so I learned a lot about basic skills, and I think I have a good grasp of data visualization. If I could give advice to myself at the start of the semester, it would be to keep going to recitations/class all the time and keep starting the labs early in the week so I have time to work through them. I would tell myself to start trying to find examples of what the readings were about from outside of the book (videos, other websites, etc.) so I'd have a better idea of how those techniques are used.
+
