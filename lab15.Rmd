@@ -146,6 +146,12 @@ I don't think my goals have changed drastically, but this course has made me mor
 
 # Johnny Tamanaha
 
+#Sub-Question: Is there a difference between the mean weight percentile for gold medal winning athletes in summer and winter olympics? 
+
+This question is important because it could point to trends for preferable body compositions for summer and winter sports. 
+
+I will use a permutation test to compare means. My null hypothesis is that there is no difference between the means of weight percentile for summer and winter athletes. 
+
 ```{r}
 data1 <- read_csv("./athlete_events.csv")
 
@@ -207,3 +213,12 @@ ggplot() +
   ylab("Count")
 
 ```
+
+```{r}
+percentile <- sum(mean_diff_sim <= mean_diff_actual) / length(mean_diff_sim)
+percentile
+```
+
+I found that there is a significant difference between the mean weight percentile and it is higher for summer athletes. There are no glaring ethical implications of this finding. This shows that summer sports optimize with athletes that are in a higher weight percentile than winter sports. 
+
+Reflection: I feel like we achieved our main goals as a team for the course. Our comfortability with data analysis increased as the semester went on. Also, our teamwork got a lot better. If I could go back in time I would suggest that our team create and maintain better communication habits. It wasn't a huge issue, but sometimes things got a little confusing near the deadline. I feel like this class has only reinforced my long term goals as a data scientists. It is easy to see how the skills from this class will apply to other projects in the future. If I could go back in time I would tell myself to read the book earlier. 
