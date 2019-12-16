@@ -146,7 +146,7 @@ I don't think my goals have changed drastically, but this course has made me mor
 
 # Johnny Tamanaha
 
-#Sub-Question: Is there a difference between the mean weight percentile for gold medal winning athletes in summer and winter olympics? 
+# Sub-Question: Is there a difference between the mean weight percentile for gold medal winning athletes in summer and winter olympics? 
 
 This question is important because it could point to trends for preferable body compositions for summer and winter sports. 
 
@@ -204,7 +204,7 @@ ggplot() +
   xlab("Mean Difference")
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot() +
   geom_histogram(aes(mean_diff_sim), color="Black", fill="White", bins=100) +
   geom_vline(xintercept=mean_diff_actual, color="Red") +
@@ -214,7 +214,7 @@ ggplot() +
 
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 percentile <- sum(mean_diff_sim <= mean_diff_actual) / length(mean_diff_sim)
 percentile
 ```
