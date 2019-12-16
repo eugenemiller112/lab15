@@ -14,7 +14,6 @@ olympic_data <- read_csv("./athlete_events.csv")
 
 ## Overall Question: What attributes make the best athelete? 
 
-## Team's Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
 
 ## Individual Sections:
 
@@ -274,3 +273,10 @@ I think the question is interesting because people may think that Athlete as a p
 Reflection:
 
 I think my goals stay the same, and I strengthened my determination to study statistics. I'm planing to take more classes about stats and programming next semester. I have never been exposed to any programming language before this semester, so learning both C ++ and R at this semester is a huge challenge for me. I put a lot of effort into supplementing my programming knowledge.But I still feel that a lot of knowledge has not been digested. If I could give advice to myself at the start of the semester, I would tell myself not to be afraid of programming psychologicallyit and don't be afraid to discuss with others when you encounter problems. Don't be shy to ask good people for advice, because the worst result of asking for help is simply being rejected, and most of the time you will get help.
+
+
+### Team Reflection
+
+Original Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
+
+For the most part, we think we achieved this goal pretty well. We all strengthened our data analysis skills and were successful in the labs, and usually worked well together as a group. If we could give ourselves advice, it would be to keep meeting up to work on labs, and try to go to class and recitation as much as possible to solidfy what we were learning. Another thing would be to make sure to divide up the lab work at the start of the week so the expectations for everyone were clear.
