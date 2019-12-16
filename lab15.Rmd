@@ -152,7 +152,7 @@ This question is important because it could point to trends for preferable body 
 
 I will use a permutation test to compare means. My null hypothesis is that there is no difference between the means of weight percentile for summer and winter athletes. 
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 data1 <- read_csv("./athlete_events.csv")
 
 data_grouped_summer <- data1 %>%
