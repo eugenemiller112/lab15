@@ -4,7 +4,7 @@ author: "allstars"
 date: "12/10/2019"
 output: html_document
 ---
-```{r}
+```{r, message=F, warning=F, echo=F}
 library(tidyverse)
 temp <- tempfile()
 regions <- read_csv("noc_regions.csv")
@@ -17,6 +17,95 @@ olympic_data <- read_csv("./athlete_events.csv")
 ## Team's Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
 
 ## Individual Sections:
+
+# Eugene Miller
+# Sub-Question: Is the correlation for weight against height the same for winter and summer athelets? 
+
+This question is important because it may reveal a certain body composition to be more favorable in the summer and a different one in the winter. As there are different sports played in the winter and summer seasons, we might expect to see a difference between the two seasons. However, it could also be the case that there is one ideal body/weight ratio for all atheletes regardless of slope, and this would be supported if linear models for weight vs height regressions were similar across season. 
+
+I will use a linear model for weight versus height across two datatsets generating two seperate linear models. One dataset will consist of only data from the summer season, and the other only from the winter season. Comparing the two models will give insight into whether there is a difference between the two seasons. 
+
+```{r, message = F, warning = F, echo = F}
+library(modelr)
+
+summer_data <- olympic_data %>% 
+  filter(Season == "Summer") %>% 
+  filter(!is.na(Weight) && !is.na(Height))
+
+winter_data <- olympic_data %>% 
+  filter(Season == "Winter") %>% 
+  filter(!is.na(Weight) && !is.na(Height))
+
+summer_mod <- lm(Height ~ Weight, data = summer_data)
+winter_mod <- lm(Height ~ Weight, data = winter_data)
+
+```
+
+```{r, message = F, warning = F, echo = F}
+summer_grid <- summer_data %>% 
+  data_grid(Weight) %>% 
+  gather_predictions(summer_mod)
+                     
+winter_grid <- winter_data %>% 
+  data_grid(Weight) %>% 
+  gather_predictions(winter_mod)
+
+ggplot(summer_data, aes(Weight, Height)) +
+  geom_point() +
+  ggtitle("Summer") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_line(data = summer_grid, aes(y = pred))
+
+ggplot(winter_data, aes(Weight, Height)) +
+  geom_point() +
+  labs(title = "Winter") +
+    theme(plot.title = element_text(hjust = 0.5)) +
+  geom_line(data = winter_grid, aes(y = pred))
+```
+
+```{r, message = F, warning = F, echo = F}
+summer_int <- summer_mod$coefficients[1]
+summer_slope <- summer_mod$coefficients[2]
+winter_int <- winter_mod$coefficients[1]
+winter_slope <- winter_mod$coefficients[2]
+```
+
+We see the difference between summer and winter atheletes in terms of body composition is not very much, as the intercept for the best linear model of summer atheletes weight vs height is `r summer_int` and a slope of `r summer_slope`. For winter atheletes the intercept was `r winter_int` and a slope of `r winter_slope`. This suggests that the ideal body composition for winter and summer sports is overall similar, even when considering the range of sports that are played in both the winter and summer. It is noted that the deviance from the summer model is larger, but this could be explained by the wider variety of sports that are played in the summer (such as weightlifting and wrestling) and the larger number of datapoints. 
+
+To determine whether this difference is indeed by chance or intrinsic in the real data, a permutation test is appropriate. By shuffling the olympic data into two subgroups representing "random" summer and winter seasons, modeling these datasets and comparing their difference in slopes with the difference in the real data we can determine if the difference in slopes between the two seasons in statistically significant. 
+
+```{r, message = F, warning = F, echo = F}
+delta_slope <- summer_slope - winter_slope
+attr(delta_slope, "names") <- NULL
+#222552 obs in summer, we will test to see if atheletes are randomly assigned to summer/winter data if the result is statistically significant.
+
+delta_vec <- numeric(20)
+
+for (i in c(1:20)){
+  shuffle <- olympic_data[sample(nrow(olympic_data)),]
+  
+  samp_A <- shuffle[1:222552,]
+  samp_B <- shuffle[222553:length(olympic_data),]
+  
+  mod_A <- lm(Height ~ Weight, data = samp_A)
+  mod_B <- lm(Height ~ Weight, data = samp_B)
+  
+  slope_A<- mod_A$coefficients[2]
+  slope_B<- mod_B$coefficients[2]
+  d_slope <- slope_A - slope_B
+  delta_vec[i] <- d_slope
+}
+
+p_value <- (1 - (sum(delta_vec < delta_slope)/20))
+```
+
+After conducting the test we have a p value of `r p_value` indicating there is a statistically significant difference between the slopes of the summer and winter models. Therefore the body types of atheletes that compete in winter vs summer games are statistically likely to be different. 
+
+Note on computational efficiency: the way the permuation test was implemented was not very efficient as it forces the computer to fit many models. However, it was necessary to determine whether the real data was an outlier or not. I am not aware of any more effient way to program this function, but if there is a more efficent method please let me know, I'm sure it will be valuable at some point in the future.
+
+The ethical implications of these findings are that they may impact coaches to influence their atheletes to adhere to more stringent programs in order for them to achieve the desired bodytype that is suggested as ideal in the models above. However, it should be noted that these models account for all olympic atheletes regardless of if they won medals or not. Therefore, strictly applying an athelete to the model may not result in improved results. 
+
+Reflection: I think that for my six month and 5 year goals, my attitude has changed towards what I plan to be doing. I want to find a way I could apply statistics and programming in some socially responsible way. I feel like I understand much better what it means to do statistical programming because of this course, and see many areas where it could be applied but hasn't yet. I learned alot about R, and data-vis, and working in a team. I would tell myself to keep starting projects early, stop spending as much time on formatting/fine details, and start finishing class exercises at home. 
 
 # Emily Archambault
 # Sub-Question: How does the number of summer Olympic medals received by the United States compare to the other most populous countries in the world?
