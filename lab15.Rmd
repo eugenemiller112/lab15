@@ -222,3 +222,55 @@ percentile
 I found that there is a significant difference between the mean weight percentile and it is higher for summer athletes. There are no glaring ethical implications of this finding. This shows that summer sports optimize with athletes that are in a higher weight percentile than winter sports. 
 
 Reflection: I feel like we achieved our main goals as a team for the course. Our comfortability with data analysis increased as the semester went on. Also, our teamwork got a lot better. If I could go back in time I would suggest that our team create and maintain better communication habits. It wasn't a huge issue, but sometimes things got a little confusing near the deadline. I feel like this class has only reinforced my long term goals as a data scientists. It is easy to see how the skills from this class will apply to other projects in the future. If I could go back in time I would tell myself to read the book earlier. 
+
+# Jingzhi Zhang
+
+# Sub-Question: How does the age of athletes affects the number of medals their country totally win in 2016?
+
+ 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+
+library(purrr)
+
+olympic <- read_csv("./athlete_events.csv")
+
+as_tibble(olympic)
+
+ 
+
+olympic %>%
+
+  arrange(Year)
+
+one_country <- olympic %>%
+
+  filter(Year == 2016) %>%
+
+  group_by(Age, Year) %>%
+
+  select(-Sex, -Sport, -Event, -City, -NOC, -Height, -Weight, -Season, -Games) %>%
+
+ summarise(medals = sum(!is.na(Medal)))
+
+ 
+
+ggplot(data = one_country) +
+
+  geom_col(mapping = aes(x = Age, y = medals), position = "stack", width = NULL, na.rm = FALSE, show.legend = NA,
+
+  inherit.aes = TRUE)+
+
+  labs(y = "Total Medals", title = "Olympic Medals Won in year 2016")
+
+```
+
+I think the question is interesting because people may think that Athlete as a profession is different from other professions, it is greatly affected by age. Through my analysis, to some extent confirms the opinion of the majority that age do affect the performance of an athlete. We can see from the graph, in year 2016, athletes between the ages of 20 and 30 receive the most medals. As age increasing, athletes receive fewer medals. Although I only chose 2016 as the analysis target, we can use the same method to infer that the number of medals won by athletes worldwide in other years will gradually decrease after the age of 30. From the image we can also get that the golden age of athletes is between 20 and 30. This relates to the overall question of what makes the best athlete by indicating that the more golden age members in a group, the more likely they will win more medals.
+
+ 
+
+Reflection:
+
+I think my goals stay the same, and I strengthened my determination to study statistics. I'm planing to take more classes about stats and programming next semester. I have never been exposed to any programming language before this semester, so learning both C ++ and R at this semester is a huge challenge for me. I put a lot of effort into supplementing my programming knowledge.But I still feel that a lot of knowledge has not been digested. If I could give advice to myself at the start of the semester, I would tell myself not to be afraid of programming psychologicallyit and don't be afraid to discuss with others when you encounter problems. Don't be shy to ask good people for advice, because the worst result of asking for help is simply being rejected, and most of the time you will get help.
