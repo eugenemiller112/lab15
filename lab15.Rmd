@@ -15,7 +15,7 @@ olympic_data <- read_csv("./athlete_events.csv")
 ## Overall Question: What attributes make the best athelete? 
 
 ```{r, message=F, warning=F, echo=F}
-golds <- olympics %>%
+golds <- olympic_data %>%
   group_by(Medal, Age, Height, Weight) %>%
   summarise(medalnum = sum(!is.na(Medal)))
 
