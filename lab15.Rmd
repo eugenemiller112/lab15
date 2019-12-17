@@ -14,6 +14,8 @@ olympic_data <- read_csv("./athlete_events.csv")
 
 ## Overall Question: What attributes make the best athelete? 
 
+This question is important because if there are any common features in medal-winning athletes, the data could be used to help Olympic teams that aren't scoring as well to improve (or expose faults in the system that wouldn't allow them to).
+
 The dataset we're using shows 120 years of Olympic history, showing athletes, gender, height, weight, age, country, season, sport/event, where the Olympics were, and the medal won
 https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results
 
@@ -302,3 +304,9 @@ I think my goals stay the same, and I strengthened my determination to study sta
 Original Goal (From Lab 2): To work together effectively to analyze data and come to relevant conclusions.
 
 For the most part, we think we achieved this goal pretty well. We all strengthened our data analysis skills and were successful in the labs, and usually worked well together as a group. If we could give ourselves advice, it would be to keep meeting up to work on labs, and try to go to class and recitation as much as possible to solidfy what we were learning. Another thing would be to make sure to divide up the lab work at the start of the week so the expectations for everyone were clear.
+
+
+### Individual Contribution Summaries
+
+# Emily Archambault
+I wrote the question importance and dataset description, made the team plots, wrote the team conclusion, and wrote up the team reflection. For my individual section, I compared the number of medals won across the five most populated countries in the world.
