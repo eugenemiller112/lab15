@@ -14,6 +14,10 @@ olympic_data <- read_csv("./athlete_events.csv")
 
 ## Overall Question: What attributes make the best athelete? 
 
+The dataset we're using shows 120 years of Olympic history, showing athletes, gender, height, weight, age, country, season, sport/event, where the Olympics were, and the medal won
+https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results
+
+
 ```{r, message=F, warning=F, echo=F}
 golds <- olympic_data %>%
   group_by(Medal, Age, Height, Weight) %>%
