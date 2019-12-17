@@ -310,3 +310,6 @@ For the most part, we think we achieved this goal pretty well. We all strengthen
 
 # Emily Archambault
 I wrote the question importance and dataset description, made the team plots, wrote the team conclusion, and wrote up the team reflection. For my individual section, I compared the number of medals won across the five most populated countries in the world.
+
+# Johnny Tamanaha
+I found the dataset. For my individual section I compared the mean weight percentiles for summer and winter athletes with a permutation test. 
