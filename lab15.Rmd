@@ -313,3 +313,6 @@ I wrote the question importance and dataset description, made the team plots, wr
 
 # Johnny Tamanaha
 I found the dataset. For my individual section I compared the mean weight percentiles for summer and winter athletes with a permutation test. 
+
+# Eugene Miller
+In my individual section I compared height and weight regression across seasons. I helped with data import as well.
