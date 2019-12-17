@@ -14,6 +14,24 @@ olympic_data <- read_csv("./athlete_events.csv")
 
 ## Overall Question: What attributes make the best athelete? 
 
+```{r, message=F, warning=F, echo=F}
+golds <- olympics %>%
+  group_by(Medal, Age, Height, Weight) %>%
+  summarise(medalnum = sum(!is.na(Medal)))
+
+ggplot(data = golds) + geom_col(mapping = aes(x = Age, y = medalnum)) + 
+  labs(y = "Medal Count", title = "Distribution of Medals Won vs Athlete Age")
+
+ggplot(data = golds) + geom_point(mapping = aes(x = Height, y = medalnum)) +
+  ylim(0, 13) +
+  labs(y = "Medal Count", x = "Height in Cm", title = "Distribution of Medals Won vs Athlete Height")
+
+ggplot(data = golds) + geom_col(mapping = aes(x = Weight, y = medalnum)) + 
+  xlim(0, 175) +
+  labs(y = "Medal Count", x = "Weight in Kg", title = "Distribution of Medals Won vs Athlete Weight")
+```
+These graphs show the distribution of the number of gold, silver, and bronze medals across all Olympic sports compared to three variables: age, height, and weight. It appears that the highest-scoring age is around 25 years old, height is about 175 cm, and weight is about 75 kg. These numbers could indicate ideal figures for the most successful athletes, however, the ideal age, height and weight to make the "best athlete" likely vary widely based on the sport.
+
 
 ## Individual Sections:
 
