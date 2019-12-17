@@ -316,3 +316,6 @@ I found the dataset. For my individual section I compared the mean weight percen
 
 # Eugene Miller
 In my individual section I compared height and weight regression across seasons. I helped with data import as well.
+
+# Jingzhi Zhang
+I wrote my individual section. In my individual part, I find the correlation between the age of athletes and the number of medals their country totally win in 2016.
